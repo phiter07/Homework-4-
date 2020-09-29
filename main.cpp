@@ -51,8 +51,11 @@ int main() {
     int productCount = product(original);
     cout << "product: " << productCount << endl;
 
-  list_print(rotated);
-  list_print(testlist);
+    int n = 9;
+    cout << "Fib Recursion: " << fib(n) << endl;
+    cout << "Fib Tail Recursion: " << fib_tail(n);
+  //list_print(rotated);
+  //list_print(testlist);
 
 
 
