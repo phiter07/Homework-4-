@@ -52,6 +52,7 @@ list_t append(list_t first, list_t second);
     // EFFECTS: returns the list (first second)
     */ 
 
+list_t filteroddHelper(list_t list);
 list_t filter_odd(list_t list);
     /*
     // EFFECTS: returns a new list containing only the elements of the
@@ -62,6 +63,7 @@ list_t filter_odd(list_t list);
     // you would get the list ( 1 3 )
     */ 
 
+list_t filterevenHelper(list_t list);
 list_t filter_even(list_t list);
     /*
     // EFFECTS: returns a new list containing only the elements of the
@@ -72,12 +74,14 @@ list_t filter_even(list_t list);
     // you would get the list ( 4 0 )
     */
 
+
 list_t filter(list_t list, bool (*fn)(int));
     /*
     // EFFECTS: returns a list containing precisely the elements of list
     //          for which the predicate fn() evaluates to true, in the
     //          order in which  they appeared in list.
     */
+
 
 list_t rotate(list_t list, unsigned int n);
     /*
@@ -86,6 +90,7 @@ list_t rotate(list_t list, unsigned int n);
     //
     // For example, rotate(( 1, 2, 3, 4, 5), 2) yields ( 3, 4, 5, 1, 2 )
     */
+
 
 list_t insert_list(list_t first, list_t second, unsigned int n);
     /*

@@ -39,8 +39,17 @@ int main() {
       rotated = list_make((i+steps)%largest, rotated);
     }
 
-    testlist = rotate(original, steps);
-    bool results  = ListEqual(testlist, rotated);
+    //testlist = rotate(original, steps);
+    //bool results  = ListEqual(testlist, rotated);
+
+    list_print(original);
+    cout << endl;
+
+    int sumCount = sum(original); 
+    cout << "sum: " << sumCount << endl;
+
+    int productCount = product(original);
+    cout << "product: " << productCount << endl;
 
   list_print(rotated);
   list_print(testlist);
