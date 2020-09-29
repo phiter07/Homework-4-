@@ -107,6 +107,16 @@
 *  if (n <= 1)
 *    return n
 *    return fib(n-1) + fib(n-2)
+*
+* fib_tailHelper(a, b, n)
+*  if (n > 0)
+*   return fib_tailHelper(b, a+b, n-1)
+*  else
+*   return a
+*
+* fib_tail (n)
+*  return fib_tailHelper(0, 1, n)
+*
 ***** -------------------------------------- *****
 ****/
 
@@ -174,7 +184,7 @@ list_t reverse(list_t list) {
     return reverseHelper(list, list_make());
 }
 
-list_t appendHelper(list_t list, list_t secondList){
+list_t appendHelper(list_t list, list_t secondList) {
   if (list_isEmpty(list)){
     return secondList;
   }else{
@@ -182,7 +192,7 @@ list_t appendHelper(list_t list, list_t secondList){
   }
 }
 
-list_t append(list_t first, list_t second){
+list_t append(list_t first, list_t second) {
   if (list_isEmpty(first) && list_isEmpty(second)) {
     return first;
   } else{
@@ -190,12 +200,12 @@ list_t append(list_t first, list_t second){
   }
 }
 
- list_t filter_oddHelper(list_t list, list_t newlist){
+ list_t filter_oddHelper(list_t list, list_t newlist) {
   if(list_isEmpty(list)){
     newlist = reverse(newlist);
     return newlist;
   } 
-  else if(list_first(list) % 2 != 0){
+  else if(list_first(list) % 2 != 0) {
     return filter_oddHelper(list_rest(list), list_make(list_first(list), newlist));
   }
   else{
@@ -203,7 +213,7 @@ list_t append(list_t first, list_t second){
   }
 }
 
-list_t filter_odd(list_t list){
+list_t filter_odd(list_t list) {
   if(list_isEmpty(list)){
     return list;
   } else{
@@ -216,7 +226,7 @@ list_t filter_odd(list_t list){
     newlist = reverse(newlist);
     return newlist;
   } 
-  else if(list_first(list) % 2 == 0){
+  else if(list_first(list) % 2 == 0) {
     return filter_evenHelper(list_rest(list), list_make(list_first(list), newlist));
   }
   else{
@@ -224,7 +234,7 @@ list_t filter_odd(list_t list){
   }
 }
 
-list_t filter_even(list_t list){
+list_t filter_even(list_t list) {
   if(list_isEmpty(list)){
     return list;
   } else{
@@ -233,10 +243,20 @@ list_t filter_even(list_t list){
 }
 
 
-
-int fib(int n){
+int fib(int n) {
   if (n <= 1) 
     return n; 
     return fib(n-1) + fib(n-2);
+}
+
+int FibTailHelper(int a, int b, int n) {
+  if(n > 0)
+    return FibTailHelper(b, a+b, n-1);
+  else
+    return a;
+}
+
+int fib_tail(int n) {
+  return FibTailHelper(0, 1, n);
 }
 
