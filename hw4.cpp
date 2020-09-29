@@ -88,16 +88,20 @@
 *    return filter_evenHelper(list, make)
 ***** -------------------------------------- *****
 * list_t filter(list, bool *fn int)
-*
+*  returns a list = to original for which evaluates
+*  to true
 ***** -------------------------------------- *****
 * list_t rotate(list, n)
-*
+*  returns a list = to original with first element
+*  moved to end of list n times
 ***** -------------------------------------- *****
 * list_t insert_list(first, second, n)
-*
+*  n <= number of elements in first
+*  returns list comprising first n elements
 ***** -------------------------------------- *****
 * list_t chop(l, n)
-*
+*  l has least elements
+*  returns list equal to l without last n elements
 ***** -------------------------------------- *****
 * int fib (n)
 *  if (n <= 1)
