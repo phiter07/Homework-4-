@@ -242,6 +242,58 @@ list_t filter_even(list_t list) {
   }
 }
 
+// *************
+list_t InsertListHelper(list_t first, list_t second, unsigned int n, list_t new_list) {
+  if (n==0) {
+    return append(reverse(new_list), append(second, first));
+  }
+  return InsertListHelper(list_rest(first), second, n-1, list_make(list_first(first),new_list));
+}
+
+list_t insert_list(list_t first, list_t second, unsigned int n) {
+  return InsertListHelper(first, second, n, list_make());
+}
+
+// *************
+static list_t rotateHelper(list_t input_list, list_t saved_list){
+
+    saved_list = list_make(list_first(input_list), saved_list);
+
+    if (list_isEmpty(list_rest(input_list))) {
+        return saved_list;
+    }
+    else {
+        return rotateHelper(list_rest(input_list), saved_list);
+    }
+
+}
+
+list_t rotate(list_t input_list, unsigned int n) {
+  if (n > 0) {
+    list_t temp_list = list_make();
+    temp_list = list_make(list_first(input_list), temp_list);
+    temp_list = rotateHelper(reverse(list_rest(input_list)), temp_list);
+    return rotate(temp_list, (n - 1));
+  }
+  else {
+      return input_list;
+  }
+}
+// *************
+
+list_t chop(list_t input_list, unsigned int n){
+  if (n > 0) {
+    if (!list_isEmpty(input_list)) {
+      input_list = reverse(input_list);
+      input_list = list_rest(input_list);
+      input_list = reverse(input_list);
+      return chop(input_list, (n - 1));
+    }
+  }
+    return input_list;
+}
+
+// *************
 
 int fib(int n) {
   if (n <= 1) 
