@@ -246,8 +246,7 @@ list_t filterHelper (list_t list, bool (*fn)(int), list_t outputList) {
 list_t filter(list_t list, bool(*fn)(int)) {
   list_t output_list = list_make();
   return filterHelper(list, fn, output_list);
-}
-// *****************
+} // *****************
 
 list_t filter_even(list_t list) {
   if(list_isEmpty(list)){
@@ -258,40 +257,36 @@ list_t filter_even(list_t list) {
 }
 
 // *************
-list_t InsertListHelper(list_t first, list_t second, unsigned int n, list_t new_list) {
-  if (n==0) {
-    return append(reverse(new_list), append(second, first));
+static list_t insertHelper(list_t first, list_t second, list_t outputList, unsigned int n) {
+  if (n != 0) {
+  outputList = list_make(list_first(first), outputList);
+  n--;
+  return insertHelper(list_rest(first), second, outputList, n);
   }
-  return InsertListHelper(list_rest(first), second, n-1, list_make(list_first(first),new_list));
+  else if (!list_isEmpty(second) && n == 0) {
+    outputList = list_make(list_first(second), outputList);
+    return insertHelper(first, list_rest(second), outputList, n);
+  }
+  else if (!list_isEmpty(first) && n == 0) {
+    outputList = list_make(list_first(first), outputList);
+    return insertHelper(list_rest(first), second, outputList, n);
+  }
+  return reverse(outputList);
 }
 
 list_t insert_list(list_t first, list_t second, unsigned int n) {
-  return InsertListHelper(first, second, n, list_make());
+  list_t outputList = list_make();
+  return insertHelper(first, second, outputList, n);
 }
 
 // *************
-static list_t rotateHelper(list_t input_list, list_t saved_list){
 
-    saved_list = list_make(list_first(input_list), saved_list);
-
-    if (list_isEmpty(list_rest(input_list))) {
-        return saved_list;
-    }
-    else {
-        return rotateHelper(list_rest(input_list), saved_list);
-    }
-}
-
-list_t rotate(list_t input_list, unsigned int n) {
-  if (n > 0) {
-    list_t temp_list = list_make();
-    temp_list = list_make(list_first(input_list), temp_list);
-    temp_list = rotateHelper(reverse(list_rest(input_list)), temp_list);
-    return rotate(temp_list, (n - 1));
-  }
-  else {
-      return input_list;
-  }
+list_t rotate(list_t inputList, unsigned int n) {
+  if (n == 0) 
+    return inputList;
+  inputList = reverse(list_make(list_first(inputList), reverse(inputList)));
+  n--;
+  return rotate(inputList, n);
 }
 // *************
 
