@@ -234,6 +234,21 @@ list_t filter_odd(list_t list) {
   }
 }
 
+// *****************
+list_t filterHelper (list_t list, bool (*fn)(int), list_t outputList) {
+  if(list_isEmpty(list)) 
+    return reverse(outputList);
+  if(fn(list_first(list))) 
+    outputList = list_make (list_first(list), outputList);
+  return filterHelper(list_rest(list), fn, outputList);
+}
+
+list_t filter(list_t list, bool(*fn)(int)) {
+  list_t output_list = list_make();
+  return filterHelper(list, fn, output_list);
+}
+// *****************
+
 list_t filter_even(list_t list) {
   if(list_isEmpty(list)){
     return list;
@@ -287,6 +302,7 @@ list_t chop(list_t input_list, unsigned int n) {
   n--;
   return chop(input_list, n);
 }
+// *************
 
 /*
 list_t chop(list_t input_list, unsigned int n){
@@ -321,7 +337,7 @@ int fib(int n) {
 }
 
 int fib_tail(int n) {
-  return fibHelper(n,0)
+  return fibHelper(n,0);
 }
 
 
