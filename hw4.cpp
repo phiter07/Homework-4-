@@ -265,7 +265,6 @@ static list_t rotateHelper(list_t input_list, list_t saved_list){
     else {
         return rotateHelper(list_rest(input_list), saved_list);
     }
-
 }
 
 list_t rotate(list_t input_list, unsigned int n) {
@@ -281,6 +280,15 @@ list_t rotate(list_t input_list, unsigned int n) {
 }
 // *************
 
+list_t chop(list_t input_list, unsigned int n) {
+  if (n == 0)
+    return input_list;
+  input_list = reverse(list_rest(reverse(input_list)));
+  n--;
+  return chop(input_list, n);
+}
+
+/*
 list_t chop(list_t input_list, unsigned int n){
   if (n > 0) {
     if (!list_isEmpty(input_list)) {
@@ -292,15 +300,32 @@ list_t chop(list_t input_list, unsigned int n){
   }
     return input_list;
 }
+*/
 
 // *************
 
-int fib(int n) {
-  if (n <= 1) 
-    return n; 
-    return fib(n-1) + fib(n-2);
+int fibHelper(int n, int i = 0, int j = 1) {
+  if (n==0)
+    return 0;
+  if (n==1)
+    return j;
+  return fibHelper(n - 1, j, i + j);
 }
 
+int fib(int n) {
+  if (n == 0)
+    return 0;
+  if (n ==1)
+    return 1;
+  return fib(n-1) + (fib(n-2));
+}
+
+int fib_tail(int n) {
+  return fibHelper(n,0)
+}
+
+
+/*
 int FibTailHelper(int a, int b, int n) {
   if(n > 0)
     return FibTailHelper(b, a+b, n-1);
@@ -311,4 +336,4 @@ int FibTailHelper(int a, int b, int n) {
 int fib_tail(int n) {
   return FibTailHelper(0, 1, n);
 }
-
+*/
